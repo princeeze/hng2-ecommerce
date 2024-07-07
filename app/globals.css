@@ -6,4 +6,15 @@
   h2 {
     @apply pb-10 text-5xl font-semibold leading-[67.20px];
   }
+  .footer-item {
+    @apply flex flex-col;
+  }
+
+  .footer-item h5 {
+    @apply pb-5 text-xl font-semibold text-zinc-900;
+  }
+
+  .footer-item a {
+    @apply pb-2 text-lg text-[#756C65] hover:underline;
+  }
 }
