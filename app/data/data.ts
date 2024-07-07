@@ -8,6 +8,12 @@ interface promoItems {
   image: string;
 }
 
+interface gridItem {
+  img: number;
+  title: string;
+  content: string;
+}
+
 export const fSearch: string[] = [
   "Rechargeable Fan",
   "iPhone 15 Pro Max",
@@ -54,4 +60,22 @@ export const promoItems: promoItems[] = [
 
 export const catItems: Number[] = [
   1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
+];
+
+export const gridItems: gridItem[] = [
+  {
+    img: 0,
+    title: "fast delivery",
+    content: "Free delivery for all orders above 100,00 thousand naira",
+  },
+  {
+    img: 1,
+    title: "24/7 SUPPORT SYSTEM",
+    content: "Friendly 24/7 Customer Support",
+  },
+  {
+    img: 2,
+    title: "secure system",
+    content: "Secured payment via all our mode of payment",
+  },
 ];
