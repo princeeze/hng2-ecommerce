@@ -10,7 +10,7 @@ import downArrow from "@/public/downArrow.svg";
 
 export default function Navbar() {
   return (
-    <nav className=" ">
+    <nav className="sticky top-0 z-50 bg-white">
       <div className="flex w-full justify-between px-10 py-6">
         <div className="align-center flex gap-16">
           <Link href={""}>
