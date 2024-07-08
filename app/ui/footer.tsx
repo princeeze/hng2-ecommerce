@@ -8,7 +8,7 @@ import google from "@/public/google.svg";
 export default function Footer() {
   return (
     <footer className="bg-[#FFE5CE]">
-      <div className="grid grid-cols-[1fr_1fr_1fr_1.5fr] justify-between gap-8 p-10">
+      <div className="grid grid-cols-1 gap-8 p-10 sm:grid-cols-[1fr_1fr_1fr_1.5fr] sm:gap-12">
         <div className="footer-item">
           <h5>Contact us</h5>
           <a href="">No 123, Ikeja, Lagos State, Nigeria.</a>
