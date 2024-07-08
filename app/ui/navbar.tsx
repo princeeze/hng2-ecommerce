@@ -60,13 +60,14 @@ export default function Navbar() {
       <div className="scroll flex w-full justify-between overflow-x-scroll bg-[#191B1F] sm:overflow-auto sm:px-4 md:justify-center md:gap-16">
         {links.map((item) => {
           return (
-            <div
+            <Link
+              href="./"
               className="flex items-center gap-2 p-2 text-sm font-light hover:bg-gray-950"
               key={item.name}
             >
               <span className="uppercase text-white">{item.name}</span>
               {item.dropdown && <Image src={downArrow} alt="downArrow" />}
-            </div>
+            </Link>
           );
         })}
       </div>
