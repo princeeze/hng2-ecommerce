@@ -140,18 +140,18 @@ export default function Page() {
 
         <section className="mt-14">
           <h2>All Products</h2>
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 md:gap-2 lg:grid-cols-4">
+          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 md:gap-6 lg:grid-cols-4">
             {catItems.slice(4, 20).map((item, index) => {
               return (
                 <a
-                  href=""
+                  href="./cart"
                   key={index}
                   // style={{
                   //   filter: "drop-shadow(0px 8px 12px rgba(25, 27, 31, 0.03))",
                   // }}
                   className={`flex flex-col overflow-hidden rounded-[10px] border border-solid border-[#D1D1D2] bg-white drop-shadow-sm hover:drop-shadow-lg`}
                 >
-                  <div className="flex h-72 w-full items-center justify-center bg-[#EDEDED]">
+                  <div className="flex h-60 w-full items-center justify-center bg-[#EDEDED]">
                     <Image
                       src={`/cat${index + 1}.png`}
                       width={197}
@@ -161,7 +161,7 @@ export default function Page() {
                     />
                   </div>
                   <div className="flex flex-col gap-3 p-3">
-                    <span className="text-xl font-bold text-[#191B1F]">
+                    <span className="text-xl font-medium text-[#191B1F]">
                       Earpod
                     </span>
                     <div className="flex justify-between">
@@ -219,14 +219,14 @@ export default function Page() {
                   See more
                 </a>
               </div>
-              <div className="flex items-center gap-3 pt-9">
+              <a href="" className="flex items-center gap-3 pt-9">
                 <Image src={bag} alt="bag image" width={88} />
                 <div className="flex flex-col text-black">
                   <h4 className="text-xl font-medium">Top Ladies Handbag</h4>
                   <span className="">Big Sale $20</span>
                 </div>
                 <Image src={dropdown} alt="dropdown" />
-              </div>
+              </a>
               <div className="relative hidden w-full min-[1300px]:block">
                 <Image
                   src={woman}
@@ -250,14 +250,14 @@ export default function Page() {
                   See more
                 </a>
               </div>
-              <div className="flex items-center gap-3 pt-9">
+              <a href="" className="flex items-center gap-3 pt-9">
                 <Image src={checkers} alt="checkers image" />
                 <div className="flex flex-col text-black">
                   <h4 className="text-xl font-medium">Checkers Shirt</h4>
                   <span className="">Big Sale $20</span>
                 </div>
                 <Image src={dropdown} alt="dropdown" />
-              </div>
+              </a>
               <div className="relative hidden w-full min-[1300px]:block">
                 <Image
                   src={man}
