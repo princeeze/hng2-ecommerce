@@ -134,7 +134,7 @@ export default function Page() {
                 className="mt-[-15px] rounded-md border border-gray-300 bg-gray-100 p-2 focus:outline-none focus:ring-2 focus:ring-gray-300"
                 placeholder="Fullname"
               />
-              <div className="grid w-full grid-cols-3 gap-4">
+              <div className="grid w-full grid-cols-3 items-end gap-4">
                 <div className="w-full">
                   <label htmlFor="fullname">CVV Number</label>
                   <input
@@ -165,7 +165,7 @@ export default function Page() {
               </div>
             </form>
             <div className="flex w-full justify-between">
-              <Link href="./checkout/successful" about="Checkout">
+              <Link href="checkout/successful" about="Checkout">
                 <button
                   type="submit"
                   className="rounded-lg bg-[#FE7F0A] px-4 py-2 text-white"
@@ -173,7 +173,7 @@ export default function Page() {
                   Proceed with payment
                 </button>
               </Link>
-              <Link href="./cart/checkout" about="Checkout">
+              <Link href="./" about="Checkout">
                 <button
                   type="submit"
                   className="rounded-lg bg-[#0e0803] px-4 py-2 text-white"

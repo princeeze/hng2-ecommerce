@@ -29,14 +29,14 @@ export default function Page() {
         <h1 className="max-w-[810px] pb-7 text-4xl font-semibold leading-snug sm:text-5xl md:text-6xl">
           The Leading Online Store with the Largest Product
         </h1>
-        <Link href="./" about="Login">
+        <a href="#products" about="Login">
           <button
             className="mb-6 flex items-center justify-center gap-2.5 rounded-lg bg-[#FE7F0A] px-[18px] py-1.5 text-xl font-medium text-white hover:shadow-[0px_1px_12px_rgba(0,0,0,0.25)] sm:text-2xl"
             type="button"
           >
             <span>Shop Now</span>
           </button>
-        </Link>
+        </a>
         <div className="flex flex-col gap-6 md:flex-row md:items-center">
           <p className="text-xl sm:text-2xl">Frequently Searched:</p>
           <ol className="flex list-none flex-col gap-6 md:flex-row">
@@ -113,7 +113,10 @@ export default function Page() {
           </div>
         </section>
 
-        <section className="mt-14 flex flex-col justify-between bg-black text-white md:flex-row">
+        <section
+          id="ad"
+          className="mt-14 flex flex-col justify-between bg-black text-white md:flex-row"
+        >
           <div className="flex max-w-[760px] flex-col justify-between px-6 py-6 sm:py-8 sm:pl-8 md:py-12 md:pl-12">
             <div>
               <h2 className="pb-2 text-3xl font-semibold sm:text-4xl md:text-5xl">
@@ -139,7 +142,7 @@ export default function Page() {
         </section>
 
         <section className="mt-14">
-          <h2>All Products</h2>
+          <h2 id="products">All Products</h2>
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 md:gap-6 lg:grid-cols-4">
             {catItems.slice(4, 20).map((item, index) => {
               return (
