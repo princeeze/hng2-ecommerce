@@ -34,7 +34,7 @@ export const links: Link[] = [
     dropdown: false,
   },
   {
-    name: "Checkout",
+    name: "Seller",
     dropdown: false,
   },
   {

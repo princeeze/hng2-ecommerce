@@ -26,7 +26,7 @@ export default function Footer() {
           <h5>Account</h5>
           <a href="">My Account</a>
           <a href="">Login/Register</a>
-          <a href="">Cart</a>
+          <a href="./cart">Cart</a>
           <a href="">Wishlist</a>
         </div>
         <div className="footer-item">

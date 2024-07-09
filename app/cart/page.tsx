@@ -48,7 +48,7 @@ export default function Page() {
                     <input
                       type="text"
                       className="w-16 text-center"
-                      value="1"
+                      defaultValue="1"
                       min="1"
                       max="100"
                     />
@@ -79,7 +79,7 @@ export default function Page() {
                     <input
                       type="text"
                       className="w-16 text-center"
-                      value="1"
+                      defaultValue="1"
                       min="1"
                       max="100"
                     />
@@ -109,7 +109,7 @@ export default function Page() {
             <button>Update Cart</button>
           </Link>
         </div>
-        <div className="grid grid-cols-1 items-start gap-2 min-[638px]:grid-cols-2">
+        <div className="grid grid-cols-1 items-start gap-10 min-[638px]:grid-cols-2 md:gap-20">
           <form className="flex w-auto items-center">
             <input
               type="text"
@@ -120,7 +120,7 @@ export default function Page() {
               type="submit"
               className="w-1/2 rounded-br-lg rounded-tr-lg bg-[#FE7F0A] px-4 py-2 text-white"
             >
-              Apply Coupon
+              Apply
             </button>
           </form>
           <div className="flex flex-col items-end gap-4">

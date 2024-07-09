@@ -12,7 +12,9 @@ export default function Page() {
         <span className="text-[#191B1F]">/Checkout</span>
       </header>
       <main>
-        <h3>Billing Details</h3>
+        <h3 className="mb-2 mt-5 text-2xl font-semibold text-gray-900">
+          Billing Details
+        </h3>
         <div className="grid grid-cols-1 gap-x-20 md:grid-cols-2">
           <form className="grid grid-cols-1 gap-x-8 gap-y-5">
             <label htmlFor="fullname">Fullname</label>
@@ -112,7 +114,11 @@ export default function Page() {
                 </div>
               </div>
             </div>
-            <h3>Card Info</h3>
+            <div className="flex w-full justify-start">
+              <h3 className="mb-2 mt-5 text-2xl font-semibold text-gray-900">
+                Card Info
+              </h3>
+            </div>
             <form className="grid w-full grid-cols-1 gap-x-8 gap-y-5">
               <label htmlFor="fullname">Name on Card</label>
               <input
@@ -159,7 +165,7 @@ export default function Page() {
               </div>
             </form>
             <div className="flex w-full justify-between">
-              <Link href="" about="Checkout">
+              <Link href="./checkout/successful" about="Checkout">
                 <button
                   type="submit"
                   className="rounded-lg bg-[#FE7F0A] px-4 py-2 text-white"
