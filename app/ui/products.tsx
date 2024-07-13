@@ -7,7 +7,7 @@ import { useEffect } from "react";
 import { useProductStore } from "../store/store";
 
 export default function Products() {
-  const { products, fetchProducts } = useProductStore();
+  const { products, fetchProducts, addToCart } = useProductStore();
 
   useEffect(() => {
     fetchProducts();
@@ -20,9 +20,9 @@ export default function Products() {
       ) : (
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 md:gap-6 lg:grid-cols-4">
           {products.map((product) => {
+            const price = product.current_price?.[0]?.NGN?.[0];
             return (
-              <a
-                href="./cart"
+              <div
                 key={product.name}
                 className={`flex flex-col overflow-hidden rounded-[10px] border border-solid border-[#D1D1D2] bg-white drop-shadow-sm hover:drop-shadow-lg`}
               >
@@ -58,22 +58,31 @@ export default function Products() {
                         </div>
                       </div>
                       <div className="font-medium leading-snug text-zinc-900">
-                        <span className="pr-3 line-through opacity-40">
-                          ₦ 10,599
-                        </span>
-                        <span>₦ 9,999</span>
+                        {price != null ? (
+                          <span> ₦ {price}</span>
+                        ) : (
+                          <span>No price for this item</span>
+                        )}
+                        {product.discounted_price && (
+                          <span className="pl-3 line-through opacity-40">
+                            ₦ {product.discounted_price}
+                          </span>
+                        )}
                       </div>
                     </div>
-                    <div className="flex items-center">
+                    <button
+                      onClick={() => addToCart(product)}
+                      className="flex items-center"
+                    >
                       <Image
                         src={Add}
                         alt="Add Icon"
                         className="w-10 pt-10 hover:text-[#FE7F0A]"
                       />
-                    </div>
+                    </button>
                   </div>
                 </div>
-              </a>
+              </div>
             );
           })}
         </div>
