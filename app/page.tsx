@@ -2,8 +2,6 @@ import Image from "next/image";
 import whiteLogo from "@/public/whiteLogo.svg";
 import hero from "@/public/hero.jpg";
 import ps5 from "@/public/playstation.png";
-import star from "@/public/star.svg";
-import Add from "@/public/Add.svg";
 import Link from "next/link";
 import bag from "@/public/bag.png";
 import dropdown from "@/public/dropdown.svg";
@@ -12,6 +10,7 @@ import man from "@/public/man.png";
 import checkers from "@/public/checkers.png";
 import email from "@/public/email.png";
 import { fSearch, promoItems, catItems, gridItems } from "./data/data";
+import Products from "./ui/products";
 
 export default function Page() {
   return (
@@ -143,68 +142,7 @@ export default function Page() {
 
         <section className="mt-14">
           <h2 id="products">All Products</h2>
-          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 md:gap-6 lg:grid-cols-4">
-            {catItems.slice(4, 20).map((item, index) => {
-              return (
-                <a
-                  href="./cart"
-                  key={index}
-                  // style={{
-                  //   filter: "drop-shadow(0px 8px 12px rgba(25, 27, 31, 0.03))",
-                  // }}
-                  className={`flex flex-col overflow-hidden rounded-[10px] border border-solid border-[#D1D1D2] bg-white drop-shadow-sm hover:drop-shadow-lg`}
-                >
-                  <div className="flex h-60 w-full items-center justify-center bg-[#EDEDED]">
-                    <Image
-                      src={`/cat${index + 1}.png`}
-                      width={197}
-                      className="px-2 py-3"
-                      height={240}
-                      alt={`cat${index + 1}.png`}
-                    />
-                  </div>
-                  <div className="flex flex-col gap-3 p-3">
-                    <span className="text-xl font-medium text-[#191B1F]">
-                      Earpod
-                    </span>
-                    <div className="flex justify-between">
-                      <div className="flex flex-col gap-2.5">
-                        <span className="text-base font-medium leading-[25.20px] text-zinc-900 opacity-60">
-                          Oraimo
-                        </span>
-                        <div className="flex gap-3">
-                          <div className="flex gap-1">
-                            <Image src={star} alt="star ion" />
-                            <span>4.9</span>
-                          </div>
-                          <div className="border-l border-gray-400 px-3">
-                            <div className="rounded-[20px] bg-neutral-200 px-2.5">
-                              <span className="text-xs font-medium text-zinc-900 opacity-60">
-                                New Arrival
-                              </span>
-                            </div>
-                          </div>
-                        </div>
-                        <div className="font-medium leading-snug text-zinc-900">
-                          <span className="pr-3 line-through opacity-40">
-                            ₦ 10,599
-                          </span>
-                          <span>₦ 9,999</span>
-                        </div>
-                      </div>
-                      <div className="flex items-center">
-                        <Image
-                          src={Add}
-                          alt="Add Icon"
-                          className="w-10 pt-10 hover:text-[#FE7F0A]"
-                        />
-                      </div>
-                    </div>
-                  </div>
-                </a>
-              );
-            })}
-          </div>
+          <Products />
         </section>
 
         <section className="my-14">
