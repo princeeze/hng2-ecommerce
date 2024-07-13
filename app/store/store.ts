@@ -1,17 +1,17 @@
 // store/products.js
 import { create } from "zustand";
 
-export interface Product {
+export interface Main {
   page: number;
   size: number;
   total: number;
   debug: null;
   previous_page: null;
   next_page: null;
-  items: Item[];
+  items: Product[];
 }
 
-export interface Item {
+export interface Product {
   name: string;
   description: null | string;
   unique_id: string;
@@ -71,7 +71,7 @@ export enum UserID {
 }
 
 interface ProductStoreState {
-  products: Item[];
+  products: Product[];
   fetchProducts: () => Promise<void>;
 }
 
