@@ -2,6 +2,8 @@ import Link from "next/link";
 import cat1 from "../../public/cat1.png";
 import cat2 from "../../public/cat2.png";
 import Image from "next/image";
+import { useProductStore } from "../store/store";
+import Cart from "../ui/cart";
 
 export default function Page() {
   return (
@@ -12,88 +14,7 @@ export default function Page() {
       </header>
       <main>
         <div className="max-w-full overflow-x-auto">
-          <table className="w-full text-center">
-            <thead>
-              <tr className="mb-4 border-b border-gray-200">
-                <th className="p-4 text-left text-lg font-medium md:w-2/5">
-                  Product
-                </th>
-                <th className="p-4 text-left text-lg font-medium md:w-1/5">
-                  Price
-                </th>
-                <th className="p-4 text-left text-lg font-medium md:w-1/5">
-                  Quantity
-                </th>
-                <th className="p-4 text-end text-lg font-medium md:w-1/5">
-                  Amount
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr className="border-gray-200">
-                <td className="flex w-max items-center gap-6 p-4 pt-6 md:px-4">
-                  <Image src={cat1} alt="cat" width={60} />
-                  <span className="text-left text-base font-medium">
-                    Sweater
-                  </span>
-                </td>
-                <td className="p-4 pt-6 text-left text-base font-medium md:px-4">
-                  $100
-                </td>
-                <td className="p-4 pt-6 text-left text-base font-medium md:px-4">
-                  <div className="flex w-fit rounded-full border border-gray-300 p-2 text-left text-base font-medium">
-                    <button className="rounded-full px-2 hover:bg-gray-300">
-                      -
-                    </button>
-                    <input
-                      type="text"
-                      className="w-16 text-center"
-                      defaultValue="1"
-                      min="1"
-                      max="100"
-                    />
-                    <button className="rounded-full px-2 hover:bg-gray-300">
-                      +
-                    </button>
-                  </div>
-                </td>
-                <td className="p-4 pt-6 text-end text-base font-medium md:px-4">
-                  $100
-                </td>
-              </tr>
-              <tr className="border-b border-gray-200">
-                <td className="flex w-max items-center gap-6 p-4 md:px-4">
-                  <Image src={cat2} alt="cat" width={60} />
-                  <span className="text-left text-base font-medium">
-                    Gamepad
-                  </span>
-                </td>
-                <td className="p-4 text-left text-base font-medium md:px-4">
-                  $100
-                </td>
-                <td className="p-4 text-left text-base font-medium md:px-4">
-                  <div className="flex w-fit rounded-full border border-gray-300 p-2 text-left text-base font-medium">
-                    <button className="rounded-full px-2 hover:bg-gray-300">
-                      -
-                    </button>
-                    <input
-                      type="text"
-                      className="w-16 text-center"
-                      defaultValue="1"
-                      min="1"
-                      max="100"
-                    />
-                    <button className="rounded-full px-2 hover:bg-gray-300">
-                      +
-                    </button>
-                  </div>
-                </td>
-                <td className="p-4 text-end text-base font-medium md:px-4">
-                  $100
-                </td>
-              </tr>
-            </tbody>
-          </table>
+          <Cart />
         </div>
         <div className="flex w-full justify-between py-12">
           <Link
