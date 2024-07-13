@@ -5,15 +5,17 @@ import logo from "@/public/logo.svg";
 import camSearch from "@/public/cam.svg";
 import search from "@/public/search.svg";
 import profile from "@/public/profile.png";
-import cart from "@/public/cart.svg";
+import cartImage from "@/public/cart.svg";
 import notification from "@/public/notification.svg";
 import Link from "next/link";
 import { links } from "@/app/data/data";
 import downArrow from "@/public/downArrow.svg";
 import ham from "@/public/hamburger.svg";
 import closed from "@/public/closed.svg";
+import { useProductStore } from "../store/store";
 
 export default function Navbar() {
+  const { cart } = useProductStore();
   const [isShow, setIsShow] = useState(false);
   const handleClick = () => setIsShow(!isShow);
   return (
@@ -62,9 +64,9 @@ export default function Navbar() {
             href="/cart"
             className="relative flex items-center gap-1 rounded-full p-3 hover:bg-gray-200"
           >
-            <Image src={cart} alt="cart image" width={24} />
+            <Image src={cartImage} alt="cart image" width={24} />
             <span className="absolute right-[2px] top-[2px] flex h-5 w-5 items-center justify-center rounded-full bg-red-600 text-[10.29px] font-bold text-white">
-              1
+              {cart.length}
             </span>
           </Link>
           <a href="">

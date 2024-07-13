@@ -22,7 +22,7 @@ export interface Product {
   unavailable: boolean;
   unavailable_start: null;
   unavailable_end: null;
-  id: string;
+  id: ID;
   parent_product_id: null;
   parent: null;
   organization_id: OrganizationID;
@@ -41,8 +41,10 @@ export interface Product {
   extra_infos: null;
 }
 
+export type ID = string;
+
 export interface CurrentPrice {
-  NGN?: Array<any[] | number | null>;
+  NGN: [number, null, any[]];
 }
 
 export enum OrganizationID {
@@ -73,6 +75,8 @@ export enum UserID {
 interface ProductStoreState {
   products: Product[];
   fetchProducts: () => Promise<void>;
+  cart: Product[];
+  addToCart: (product: Product) => void;
 }
 
 export const useProductStore = create<ProductStoreState>((set) => ({
@@ -93,5 +97,9 @@ export const useProductStore = create<ProductStoreState>((set) => ({
       console.error("Error fetching data:", error);
       throw error;
     }
+  },
+  cart: [],
+  addToCart(product) {
+    set((state) => ({ cart: [...state.cart, product] }));
   },
 }));
