@@ -94,7 +94,9 @@ export const useProductStore = create(
       fetchProducts: async () => {
         try {
           console.log("Starting fetch request");
-          const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}`);
+          const res = await fetch(
+            `${process.env.NEXT_PUBLIC_API_URL}?organization_id=${process.env.NEXT_PUBLIC_ORG_ID}&Appid=${process.env.NEXT_PUBLIC_APPID}&Apikey=${process.env.NEXT_PUBLIC_APIKEY}`,
+          );
 
           if (!res.ok) {
             throw new Error(`HTTP error! status: ${res.status}`);
