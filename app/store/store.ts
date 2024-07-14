@@ -1,5 +1,6 @@
 // store/products.js
 import { create } from "zustand";
+import { persist } from "zustand/middleware";
 
 export interface Main {
   page: number;
@@ -79,27 +80,34 @@ interface ProductStoreState {
   addToCart: (product: Product) => void;
 }
 
-export const useProductStore = create<ProductStoreState>((set) => ({
-  products: [],
-  fetchProducts: async () => {
-    try {
-      console.log("Starting fetch request");
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}`);
+export const useProductStore = create(
+  persist<ProductStoreState>(
+    (set) => ({
+      products: [],
+      fetchProducts: async () => {
+        try {
+          console.log("Starting fetch request");
+          const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}`);
 
-      if (!res.ok) {
-        throw new Error(`HTTP error! status: ${res.status}`);
-      }
+          if (!res.ok) {
+            throw new Error(`HTTP error! status: ${res.status}`);
+          }
 
-      const data = await res.json();
-      console.log("Fetch request completed successfully.");
-      set({ products: data.items });
-    } catch (error) {
-      console.error("Error fetching data:", error);
-      throw error;
-    }
-  },
-  cart: [],
-  addToCart(product) {
-    set((state) => ({ cart: [...state.cart, product] }));
-  },
-}));
+          const data = await res.json();
+          console.log("Fetch request completed successfully.");
+          set({ products: data.items });
+        } catch (error) {
+          console.error("Error fetching data:", error);
+          throw error;
+        }
+      },
+      cart: [],
+      addToCart(product) {
+        set((state) => ({ cart: [...state.cart, product] }));
+      },
+    }),
+    {
+      name: "Product Storage",
+    },
+  ),
+);
