@@ -1,3 +1,4 @@
+"use client";
 import Link from "next/link";
 import cat1 from "../../public/cat1.png";
 import cat2 from "../../public/cat2.png";
@@ -6,6 +7,12 @@ import { useProductStore } from "../store/store";
 import Cart from "../ui/cart";
 
 export default function Page() {
+  const { cart } = useProductStore();
+  const totalAmount = cart.reduce(
+    (acc, item) => acc + item.product.current_price[0].NGN[0] * item.quantity,
+    0,
+  );
+  const shippingFee = 2000;
   return (
     <div className="p-10">
       <header className="flex text-xl font-semibold text-gray-700">
@@ -49,19 +56,19 @@ export default function Page() {
               <strong>Cart Total</strong>
               <div className="flex justify-between pt-3">
                 <p>Amount</p>
-                <p>$740</p>
+                <p>₦ {totalAmount.toLocaleString()}</p>
               </div>
               <hr className="my-3 border-[#191B1F]" />
               <div className="flex justify-between">
                 <p>Shipping</p>
-                <p>$00.00</p>
+                <p>₦ {shippingFee.toLocaleString()}</p>
               </div>
               <hr className="my-2 border-[#191B1F]" />
               <div className="flex justify-between">
                 <p>
                   <strong>Total</strong>
                 </p>
-                <p>$750</p>
+                <p> ₦ {(totalAmount + shippingFee).toLocaleString()}</p>
               </div>
             </div>
             <Link href="./cart/checkout" about="Checkout">

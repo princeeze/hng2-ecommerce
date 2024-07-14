@@ -1,5 +1,6 @@
 // store/products.js
 import { create } from "zustand";
+import { persist } from "zustand/middleware";
 
 export interface Main {
   page: number;
@@ -72,34 +73,75 @@ export enum UserID {
   D1547D771E6348E9Bb4046A08Eae8582 = "d1547d771e6348e9bb4046a08eae8582",
 }
 
+interface CartItem {
+  product: Product;
+  quantity: number;
+}
+
 interface ProductStoreState {
   products: Product[];
   fetchProducts: () => Promise<void>;
-  cart: Product[];
+  cart: CartItem[];
   addToCart: (product: Product) => void;
+  updateCartQuantity: (productId: string, quantity: number) => void;
+  removeFromCart: (productId: string) => void;
 }
 
-export const useProductStore = create<ProductStoreState>((set) => ({
-  products: [],
-  fetchProducts: async () => {
-    try {
-      console.log("Starting fetch request");
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}`);
+export const useProductStore = create(
+  persist<ProductStoreState>(
+    (set) => ({
+      products: [],
+      fetchProducts: async () => {
+        try {
+          console.log("Starting fetch request");
+          const res = await fetch(
+            `${process.env.NEXT_PUBLIC_API_URL}?organization_id=${process.env.NEXT_PUBLIC_ORG_ID}&Appid=${process.env.NEXT_PUBLIC_APPID}&Apikey=${process.env.NEXT_PUBLIC_APIKEY}`,
+          );
 
-      if (!res.ok) {
-        throw new Error(`HTTP error! status: ${res.status}`);
-      }
+          if (!res.ok) {
+            throw new Error(`HTTP error! status: ${res.status}`);
+          }
 
-      const data = await res.json();
-      console.log("Fetch request completed successfully.");
-      set({ products: data.items });
-    } catch (error) {
-      console.error("Error fetching data:", error);
-      throw error;
-    }
-  },
-  cart: [],
-  addToCart(product) {
-    set((state) => ({ cart: [...state.cart, product] }));
-  },
-}));
+          const data = await res.json();
+          console.log("Fetch request completed successfully.");
+          set({ products: data.items });
+        } catch (error) {
+          console.error("Error fetching data:", error);
+          throw error;
+        }
+      },
+      cart: [],
+      addToCart(product) {
+        set((state) => {
+          const existingCartItemIndex = state.cart.findIndex(
+            (item) => item.product.id === product.id,
+          );
+
+          if (existingCartItemIndex !== -1) {
+            const updatedCart = [...state.cart];
+            updatedCart[existingCartItemIndex].quantity += 1;
+            return { cart: updatedCart };
+          }
+
+          return { cart: [...state.cart, { product, quantity: 1 }] };
+        });
+      },
+      updateCartQuantity(productId, quantity) {
+        set((state) => {
+          const updatedCart = state.cart.map((item) =>
+            item.product.id === productId ? { ...item, quantity } : item,
+          );
+          return { cart: updatedCart };
+        });
+      },
+      removeFromCart(productId) {
+        set((state) => ({
+          cart: state.cart.filter((item) => item.product.id !== productId),
+        }));
+      },
+    }),
+    {
+      name: "new store",
+    },
+  ),
+);

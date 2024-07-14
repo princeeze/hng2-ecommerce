@@ -5,6 +5,7 @@ import star from "@/public/star.svg";
 import Add from "@/public/Add.svg";
 import { useEffect } from "react";
 import { useProductStore } from "../store/store";
+import Link from "next/link";
 
 export default function Products() {
   const { products, fetchProducts, addToCart } = useProductStore();
@@ -26,7 +27,10 @@ export default function Products() {
                 key={product.name}
                 className={`flex flex-col overflow-hidden rounded-[10px] border border-solid border-[#D1D1D2] bg-white drop-shadow-sm hover:drop-shadow-lg`}
               >
-                <div className="relative flex h-60 w-full items-center justify-center bg-[#EDEDED] p-4">
+                <Link
+                  href={`/products/${product.id}`}
+                  className="relative flex h-60 w-full items-center justify-center bg-[#EDEDED] p-4"
+                >
                   <Image
                     src={`https://api.timbu.cloud/images/${product.photos[0].url}`}
                     fill={true}
@@ -34,11 +38,14 @@ export default function Products() {
                     className="overflow-hidden rounded-2xl p-4"
                     alt={product.name}
                   />
-                </div>
+                </Link>
                 <div className="flex flex-col gap-3 p-3">
-                  <span className="overflow-hidden text-ellipsis whitespace-nowrap text-xl font-bold text-[#191B1F]">
+                  <Link
+                    href={`/products/${product.id}`}
+                    className="overflow-hidden text-ellipsis whitespace-nowrap text-xl font-bold text-[#191B1F]"
+                  >
                     {product.name}
-                  </span>
+                  </Link>
                   <div className="flex justify-between">
                     <div className="flex flex-col gap-2.5">
                       <span className="text-base font-medium leading-[25.20px] text-zinc-900 opacity-60">
