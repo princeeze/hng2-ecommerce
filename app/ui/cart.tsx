@@ -1,11 +1,9 @@
 "use client";
 import { useProductStore } from "../store/store";
 import Image from "next/image";
-import cat1 from "../../public/cat1.png";
-import cat2 from "../../public/cat2.png";
 
 export default function Cart() {
-  const { cart } = useProductStore();
+  const { cart, updateCartQuantity, removeFromCart } = useProductStore();
 
   return (
     <table className="w-full text-center">
@@ -22,47 +20,81 @@ export default function Cart() {
         </tr>
       </thead>
       <tbody>
-        {cart.map((product) => {
-          const price = product.current_price?.[0]?.NGN?.[0];
+        {cart.map((item) => {
+          const price = item.product.current_price?.[0]?.NGN?.[0];
+          const handleQuantityChange = (
+            e: React.ChangeEvent<HTMLInputElement>,
+          ) => {
+            const newQuantity = parseInt(e.target.value);
+            if (!isNaN(newQuantity) && newQuantity > 0) {
+              updateCartQuantity(item.product.id, newQuantity);
+            }
+          };
+
+          const incrementQuantity = () => {
+            updateCartQuantity(item.product.id, item.quantity + 1);
+          };
+
+          const decrementQuantity = () => {
+            if (item.quantity > 1) {
+              updateCartQuantity(item.product.id, item.quantity - 1);
+            } else if (item.quantity === 1) {
+              removeFromCart(item.product.id);
+            }
+          };
           return (
-            <tr key={product.name} className="border-gray-200">
+            <tr key={item.product.name} className="border-gray-200">
               <td className="relative flex w-max items-center gap-6 p-4 pt-6 md:px-4">
                 <Image
-                  src={`https://api.timbu.cloud/images/${product.photos[0].url}`}
-                  alt={product.name}
+                  src={`https://api.timbu.cloud/images/${item.product.photos[0].url}`}
+                  alt={item.product.name}
                   width={60}
                   height={60}
                 />
                 <span className="max-w-96 truncate text-left text-base font-medium">
-                  {product.name}
+                  {item.product.name}
                 </span>
               </td>
               <td className="p-4 pt-6 text-left text-base font-medium md:px-4">
                 {price != null ? (
-                  <span> ₦ {price}</span>
+                  <span> ₦ {price.toLocaleString()}</span>
                 ) : (
                   <span>No price for this item</span>
                 )}
               </td>
               <td className="p-4 pt-6 text-left text-base font-medium md:px-4">
                 <div className="flex w-fit rounded-full border border-gray-300 p-2 text-left text-base font-medium">
-                  <button className="rounded-full px-2 hover:bg-gray-300">
+                  <button
+                    onClick={decrementQuantity}
+                    className="rounded-full px-2 hover:bg-gray-300"
+                  >
                     -
                   </button>
-                  <input
-                    type="text"
-                    className="w-16 text-center"
-                    defaultValue="1"
-                    min="1"
-                    max="100"
-                  />
-                  <button className="rounded-full px-2 hover:bg-gray-300">
+                  {item.quantity && (
+                    <input
+                      onChange={handleQuantityChange}
+                      type="text"
+                      defaultValue={item.quantity}
+                      value={item.quantity}
+                      className="w-16 text-center"
+                      min="1"
+                      max="100"
+                    />
+                  )}
+                  <button
+                    onClick={incrementQuantity}
+                    className="rounded-full px-2 hover:bg-gray-300"
+                  >
                     +
                   </button>
                 </div>
               </td>
               <td className="p-4 pt-6 text-end text-base font-medium md:px-4">
-                $100
+                {price != null ? (
+                  <span> ₦ {(price * item.quantity).toLocaleString()}</span>
+                ) : (
+                  <span>No price for this item</span>
+                )}
               </td>
             </tr>
           );

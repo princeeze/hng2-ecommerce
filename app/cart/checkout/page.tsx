@@ -1,22 +1,30 @@
+"use client";
 import cat1 from "@/public/cat1.png";
 import cat2 from "@/public/cat2.png";
 import Image from "next/image";
 import Link from "next/link";
 import visa from "@/public/Cards.svg";
+import { useProductStore } from "@/app/store/store";
 
 export default function Page() {
+  const { cart } = useProductStore();
+  const totalAmount = cart.reduce(
+    (acc, item) => acc + item.product.current_price[0].NGN[0] * item.quantity,
+    0,
+  );
+  const shippingFee = 2000;
   return (
     <div className="p-10">
       <header className="flex text-xl font-semibold text-gray-700">
         <span>Home/Cart</span>
         <span className="text-[#191B1F]">/Checkout</span>
       </header>
-      <main>
+      <form id="Checkout">
         <h3 className="mb-2 mt-5 text-2xl font-semibold text-gray-900">
           Billing Details
         </h3>
         <div className="grid grid-cols-1 gap-x-20 md:grid-cols-2">
-          <form className="grid grid-cols-1 gap-x-8 gap-y-5">
+          <form className="grid grid-cols-1 gap-x-8 gap-y-5" action={""}>
             <label htmlFor="fullname">Fullname</label>
             <input
               type="text"
@@ -83,19 +91,19 @@ export default function Page() {
               <strong>Cart Total</strong>
               <div className="flex justify-between pt-3">
                 <p>Amount</p>
-                <p>$740</p>
+                <p>₦ {totalAmount.toLocaleString()}</p>
               </div>
               <hr className="my-3 border-[#191B1F]" />
               <div className="flex justify-between">
                 <p>Shipping</p>
-                <p>$00.00</p>
+                <p>₦ {shippingFee.toLocaleString()}</p>
               </div>
               <hr className="my-2 border-[#191B1F]" />
               <div className="flex justify-between">
                 <p>
                   <strong>Total</strong>
                 </p>
-                <p>$750</p>
+                <p> ₦ {(totalAmount + shippingFee).toLocaleString()}</p>
               </div>
             </div>
             <div className="mt-4 flex w-full flex-col gap-4">
@@ -168,6 +176,7 @@ export default function Page() {
               <Link href="checkout/successful" about="Checkout">
                 <button
                   type="submit"
+                  formTarget="Checkout"
                   className="rounded-lg bg-[#FE7F0A] px-4 py-2 text-white"
                 >
                   Proceed with payment
@@ -184,7 +193,7 @@ export default function Page() {
             </div>
           </div>
         </div>
-      </main>
+      </form>
     </div>
   );
 }
