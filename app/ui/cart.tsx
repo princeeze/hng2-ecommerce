@@ -1,5 +1,5 @@
 "use client";
-import { useProductStore } from "../store/store";
+import { useProductStore } from "@/app/store/store";
 import Image from "next/image";
 
 export default function Cart() {
@@ -50,6 +50,7 @@ export default function Cart() {
                   alt={item.product.name}
                   width={60}
                   height={60}
+                  className="h-auto w-auto"
                 />
                 <span className="max-w-96 truncate text-left text-base font-medium">
                   {item.product.name}

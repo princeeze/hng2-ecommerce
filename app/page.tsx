@@ -11,8 +11,10 @@ import checkers from "@/public/checkers.png";
 import email from "@/public/email.png";
 import { fSearch, promoItems, catItems, gridItems } from "./data/data";
 import Products from "./ui/products";
+import { fetchProducts } from "./utils/utils";
 
-export default function Page() {
+export default async function Page() {
+  const products = await fetchProducts();
   return (
     <div>
       <section
@@ -142,7 +144,17 @@ export default function Page() {
 
         <section className="mt-14">
           <h2 id="products">All Products</h2>
-          <Products />
+          <div>
+            {products.length === 0 ? (
+              <p>no products</p>
+            ) : (
+              <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 md:gap-6 lg:grid-cols-4">
+                {products.map((product) => {
+                  return <Products key={product.id} product={product} />;
+                })}
+              </div>
+            )}
+          </div>
         </section>
 
         <section className="my-14">

@@ -1,9 +1,6 @@
 "use client";
 import Link from "next/link";
-import cat1 from "../../public/cat1.png";
-import cat2 from "../../public/cat2.png";
-import Image from "next/image";
-import { useProductStore } from "../store/store";
+import { useProductStore } from "@/app/store/store";
 import Cart from "../ui/cart";
 
 export default function Page() {

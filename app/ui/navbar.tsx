@@ -12,7 +12,7 @@ import { links } from "@/app/data/data";
 import downArrow from "@/public/downArrow.svg";
 import ham from "@/public/hamburger.svg";
 import closed from "@/public/closed.svg";
-import { useProductStore } from "../store/store";
+import { useProductStore } from "@/app/store/store";
 
 export default function Navbar() {
   const { cart } = useProductStore();
@@ -25,9 +25,8 @@ export default function Navbar() {
           <Link className="flex items-center" href="/">
             <Image
               src={logo}
-              width={100}
               alt="logo"
-              className="h-7 sm:h-8 lg:h-10"
+              className="h-7 w-auto sm:h-8 lg:h-10"
             />
           </Link>
           <div className="hidden h-11 grow gap-2 rounded-[40px] border border-solid border-[rgba(35,37,41,0.8)] p-1 pl-3 focus-within:ring-2 hover:ring-2 min-[800px]:flex">
