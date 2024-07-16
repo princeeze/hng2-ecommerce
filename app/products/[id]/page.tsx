@@ -1,9 +1,8 @@
 "use client";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { ID, Product } from "@/app/store/store";
-import { useProductStore } from "@/app/store/store";
 import Image from "next/image";
+import { ID, Product } from "@/app/utils/utils";
 
 export default function Page({ params }: { params: { id: ID } }) {
   const [product, setProduct] = useState<Product | null>(null);
